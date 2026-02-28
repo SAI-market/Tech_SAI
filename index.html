@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tech Sai - Soporte y Optimización</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+  <div id="cartModal" class="cart-modal hidden">
+    <div class="cart-content">
+      <button id="closeCart" class="close-btn">X</button>
+      <h2>Tu Carrito de Servicios</h2>
+      
+      <div class="promo-container">
+        <p style="color:var(--neon); font-size: 0.9rem; margin-bottom: 5px;">
+          🔥 Llevando 2 o más servicios obtienes un <strong>10% de descuento</strong> en el total.
+        </p>
+      </div>
+
+      <div id="cartItems" class="cart-items" style="max-height: 35vh; overflow-y: auto; margin: 15px 0; padding-right: 10px;"></div>
+      
+      <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+        <h3 style="font-size: 1.1rem; margin-bottom: 10px;">Modalidad:</h3>
+        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin-bottom: 8px;">
+          <input type="radio" name="shipping" value="taller" checked /> Traer al taller
+        </label>
+        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin-bottom: 8px;">
+          <input type="radio" name="shipping" value="remoto" /> Soporte Remoto (Solo Software)
+        </label>
+        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+          <input type="radio" name="shipping" value="domicilio" /> A domicilio (Costo extra según zona)
+        </label>
+      </div>
+
+      <div class="cart-actions">
+        <div id="cartSummary" class="cart-summary" style="font-size: 1.1rem; margin-bottom: 15px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px; text-align: right; line-height: 1.5;"></div>
+        <div class="cart-buttons" style="display:flex; gap:10px;">
+          <button id="clearCart" style="padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:transparent; color:var(--text); cursor:pointer; flex:1;">Vaciar</button>
+          <button id="checkoutBtn" class="primary" style="flex:2;">Agendar por WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="diagnosticModal" class="cart-modal hidden">
+    <div class="cart-content" style="max-width: 500px; text-align: center;">
+      <button id="closeDiagnostic" class="close-btn">X</button>
+      <h2>Asistente de Diagnóstico</h2>
+      <p style="color:var(--muted); margin-bottom: 20px;">Responde estas preguntas y te recomendaremos qué hacer.</p>
+      
+      <div id="diagStep1" class="diag-step">
+        <h3>1. ¿Qué tipo de equipo tienes?</h3>
+        <div style="display:flex; gap:10px; justify-content:center; margin-top:15px;">
+          <button class="size-option diag-btn" data-pc="escritorio"><ion-icon name="desktop-outline"></ion-icon> PC de Escritorio</button>
+          <button class="size-option diag-btn" data-pc="notebook"><ion-icon name="laptop-outline"></ion-icon> Notebook</button>
+        </div>
+      </div>
+
+      <div id="diagStep2" class="diag-step hidden">
+        <h3>2. ¿Cuál es el problema principal?</h3>
+        <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
+          <button class="size-option diag-btn" data-issue="lenta">Está muy lenta o tiene virus</button>
+          <button class="size-option diag-btn" data-issue="calienta">Calienta mucho / Hace ruido</button>
+          <button class="size-option diag-btn" data-issue="armado">Quiero armar una PC nueva</button>
+        </div>
+      </div>
+
+      <div id="diagResult" class="diag-step hidden">
+        <h3 style="color:var(--neon);">¡Diagnóstico Listo!</h3>
+        <p style="margin: 15px 0;">Según lo que nos cuentas, te recomendamos el siguiente servicio:</p>
+        <div id="recommendedService" style="background:rgba(255,255,255,0.05); padding:15px; border-radius:10px; margin-bottom:15px; font-weight:bold;">
+          </div>
+        <button id="addRecommendedBtn" class="primary" style="width:100%;">Agregar al Carrito y Continuar</button>
+        <button id="resetDiagBtn" style="margin-top:10px; padding:10px; background:transparent; color:var(--text); border:none; cursor:pointer; text-decoration:underline;">Hacer de nuevo</button>
+      </div>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo" style="width: auto; padding: 0 15px;">TECH SAI</div>
+    </div>
+    <div class="controls">
+      <div class="dark-mode-toggle" id="themeToggle">
+        <div class="circle">
+            <ion-icon class="sun" name="sunny"></ion-icon>
+            <ion-icon class="moon" name="moon"></ion-icon>
+        </div>
+      </div>
+      <button id="startDiagnosticBtn" class="primary" style="background-color: #f1c40f; color: #111;">🔍 Asistente Rápido</button>
+      <button id="cartBtn">🛒 Carrito (<span id="cartCount">0</span>)</button>
+    </div>
+  </header>
+
+  <main>
+    <div style="text-align: center; margin-bottom: 30px;">
+      <h1 style="margin-bottom: 10px;">Nuestros Servicios</h1>
+      <p style="color: var(--muted);">Selecciona los servicios que necesitas o usa nuestro Asistente Rápido.</p>
+    </div>
+    
+    <div id="categoriesContainer" class="categories-container" style="justify-content: center;"></div>
+    <section id="gallery" class="gallery"></section>
+  </main>
+
+  <footer class="footer"><small>Tech Sai • Soporte y Optimización de PCs</small></footer>
+
+  <button id="scrollTopBtn" class="scroll-top-btn hidden" title="Volver arriba">⬆️</button>
+
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
