@@ -56,7 +56,18 @@ function renderGallery() {
     gallery.innerHTML = "";
     const filtered = SERVICIOS.filter(s => selectedCategory === null || s.categoria === selectedCategory);
 
-    filtered.forEach(s => {
+    filtered.forEach((s, index) => {
+        // Inyectamos el logo justo antes del último servicio (índice 4)
+        // Solo lo mostramos en la vista principal ("Todos los Servicios")
+        if (selectedCategory === null && index === 4) {
+            const logoCard = document.createElement("div");
+            // Le pasamos la clase "card" para que tenga la animación hover, 
+            // y "logo-card" para el fondo claro y el cursor no clickeable.
+            logoCard.className = "card logo-card";
+            logoCard.innerHTML = `<img src="Imges/FixerSai.png" alt="Tech Sai Logo">`;
+            gallery.appendChild(logoCard);
+        }
+
         const card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
