@@ -64,7 +64,7 @@ function renderGallery() {
             <div class="srv-title">${s.nombre}</div>
             <div class="srv-desc">${s.desc}</div>
             <div class="srv-price">$${s.precio.toLocaleString()}</div>
-            <button class="add-btn" onclick="addToCart('${s.id}')">Agregar al Carrito</button>
+            <button class="add-btn" onclick="addToCart('${s.id}', event)">Agregar al Carrito</button>
         `;
         gallery.appendChild(card);
     });
@@ -88,7 +88,7 @@ function renderCategories() {
     cats.forEach(c => createPill(c, c));
 }
 
-function addToCart(serviceId) {
+function addToCart(serviceId, event = null) {
     const service = SERVICIOS.find(s => s.id === serviceId);
     if (cart[serviceId]) {
         cart[serviceId].qty++;
@@ -98,10 +98,26 @@ function addToCart(serviceId) {
     localStorage.setItem("techsai_cart", JSON.stringify(cart));
     updateCartUI();
     
-    // Feedback visual rápido
+    // Feedback visual rápido del botón carrito en la barra superior
     const btn = document.getElementById("cartBtn");
     btn.style.transform = "scale(1.1)";
     setTimeout(() => btn.style.transform = "scale(1)", 200);
+
+    // NUEVO: Feedback flotante "+1" en la posición del mouse
+    if (event) {
+        const feedback = document.createElement("div");
+        feedback.className = "floating-feedback";
+        feedback.textContent = "+1";
+        
+        // Posicionar exactamente donde está el cursor
+        feedback.style.left = `${event.clientX}px`;
+        feedback.style.top = `${event.clientY}px`;
+        
+        document.body.appendChild(feedback);
+        
+        // Eliminar el elemento del HTML después de 800ms (lo que dura la animación)
+        setTimeout(() => feedback.remove(), 800);
+    }
 }
 
 window.changeQty = (key, delta) => {
@@ -204,8 +220,8 @@ function setupEventListeners() {
             // Lógica simple de recomendación
             if(issue === 'lenta') diagResultServiceId = 'srv_formateo';
             else if(issue === 'calienta') diagResultServiceId = 'srv_limpieza';
-            else if(issue === 'armado') diagResultServiceId = 'srv_asesoramiento'; // Ahora recomienda la asesoría
-            else diagResultServiceId = 'srv_asesoramiento'; // Fallback por si acaso
+            else if(issue === 'armado') diagResultServiceId = 'srv_asesoramiento';
+            else diagResultServiceId = 'srv_asesoramiento';
 
             const recomended = SERVICIOS.find(s => s.id === diagResultServiceId);
             document.getElementById("recommendedService").innerHTML = `
@@ -217,8 +233,9 @@ function setupEventListeners() {
         };
     });
 
-    document.getElementById("addRecommendedBtn").onclick = () => {
-        if(diagResultServiceId) addToCart(diagResultServiceId);
+    // Pasa el evento "e" al botón del modal de diagnóstico también
+    document.getElementById("addRecommendedBtn").onclick = (e) => {
+        if(diagResultServiceId) addToCart(diagResultServiceId, e);
         diagnosticModal.classList.add("hidden");
         cartModal.classList.remove("hidden"); // Le abre el carrito
     };

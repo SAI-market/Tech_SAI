@@ -128,3 +128,24 @@ body.active .card { background: var(--card); }
 body.active h1, body.active h2, body.active h3, body.active p, body.active label { color: #fbfbeb !important; }
 .footer { padding: 20px; text-align: center; color: var(--muted); }
 .hidden { display: none !important; }
+
+/* feedback +1 flotante */
+.floating-feedback {
+  position: fixed;
+  background: var(--neon);
+  color: var(--bg);
+  font-weight: 900;
+  padding: 1px 10px;
+  border-radius: 50px; /* <--- Este es el cambio */
+  pointer-events: none;
+  z-index: 9999;
+  font-size: 1.1rem;
+  transform: translate(-50%, -50%);
+  animation: floatUpFade 0.8s ease-out forwards;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+@keyframes floatUpFade {
+  0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -80px) scale(1.3); }
+}
