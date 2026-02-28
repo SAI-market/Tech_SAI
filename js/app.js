@@ -1,32 +1,32 @@
-// Tu número de WhatsApp (cámbialo aquí)
-const WHATSAPP_NUMBER = "5491100000000"; 
+// wp
+const WHATSAPP_NUMBER = "5492323521229"; 
 
 // --- BASE DE DATOS DE SERVICIOS ---
 const SERVICIOS = [
     { 
         id: "srv_limpieza", nombre: "Limpieza Física Profunda", categoria: "Mantenimiento", 
-        desc: "Desarme completo, limpieza de polvo, cambio de pasta térmica de alta calidad y gestión de cables.", 
-        precio: 15000, icon: "hardware-chip-outline" 
+        desc: "Desarme completo, limpieza de polvo y gestión de cables.", 
+        precio: 30000, icon: "hardware-chip-outline" 
     },
     { 
         id: "srv_formateo", nombre: "Formateo + Instalación de OS", categoria: "Software", 
         desc: "Instalación limpia de Windows, drivers actualizados y programas básicos (Office, navegadores).", 
-        precio: 12000, icon: "logo-windows" 
+        precio: 17000, icon: "logo-windows" 
     },
     { 
         id: "srv_optimiza", nombre: "Optimización Gaming/Edición", categoria: "Software", 
         desc: "Ajuste de Windows para sacar el máximo rendimiento, reducir latencia (input lag) y mejorar FPS.", 
-        precio: 8000, icon: "game-controller-outline" 
+        precio: 15000, icon: "game-controller-outline" 
     },
     { 
         id: "srv_armado", nombre: "Armado de PC (Ensamblaje)", categoria: "Hardware", 
         desc: "Armado profesional de tu computadora desde cero con las piezas que nos traigas.", 
-        precio: 20000, icon: "construct-outline" 
+        precio: 55000, icon: "construct-outline" 
     },
     { 
         id: "srv_diagnostico", nombre: "Diagnóstico Completo", categoria: "Reparación", 
         desc: "Revisión profunda de hardware y software para encontrar fallas. (Se descuenta si reparas con nosotros).", 
-        precio: 5000, icon: "medkit-outline" 
+        precio: 7500, icon: "medkit-outline" 
     }
 ];
 
