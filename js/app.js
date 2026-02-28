@@ -26,7 +26,7 @@ const SERVICIOS = [
     { 
         id: "srv_asesoramiento", nombre: "Asesoramiento para PC a Medida", categoria: "Asesoramiento", 
         desc: "Te ayudamos a elegir los componentes ideales según tu presupuesto y lo que quieras jugar o trabajar, para que no gastes de más.", 
-        precio: 10000, icon: "bulb-outline" 
+        precio: 13000, icon: "bulb-outline" 
     }
 ];
 
