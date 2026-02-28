@@ -24,7 +24,7 @@ body.active {
 
 body {
   font-family: 'Inter', system-ui, sans-serif;
-  background: linear-gradient(180deg, #f0f0f0 0%, #e0e0e0 100%);
+  background: linear-gradient(180deg,   #757373 0%, #e0e0e0 100%);
   color: var(--text);
   display: flex; flex-direction: column; min-height: 100vh;
   transition: background-color 0.4s ease;

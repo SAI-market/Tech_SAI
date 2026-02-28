@@ -24,9 +24,9 @@ const SERVICIOS = [
         precio: 55000, icon: "construct-outline" 
     },
     { 
-        id: "srv_diagnostico", nombre: "Diagnóstico Completo", categoria: "Reparación", 
-        desc: "Revisión profunda de hardware y software para encontrar fallas. (Se descuenta si reparas con nosotros).", 
-        precio: 7500, icon: "medkit-outline" 
+        id: "srv_asesoramiento", nombre: "Asesoramiento para PC a Medida", categoria: "Asesoramiento", 
+        desc: "Te ayudamos a elegir los componentes ideales según tu presupuesto y lo que quieras jugar o trabajar, para que no gastes de más.", 
+        precio: 10000, icon: "bulb-outline" 
     }
 ];
 
@@ -204,8 +204,8 @@ function setupEventListeners() {
             // Lógica simple de recomendación
             if(issue === 'lenta') diagResultServiceId = 'srv_formateo';
             else if(issue === 'calienta') diagResultServiceId = 'srv_limpieza';
-            else if(issue === 'armado') diagResultServiceId = 'srv_armado';
-            else diagResultServiceId = 'srv_diagnostico';
+            else if(issue === 'armado') diagResultServiceId = 'srv_asesoramiento'; // Ahora recomienda la asesoría
+            else diagResultServiceId = 'srv_asesoramiento'; // Fallback por si acaso
 
             const recomended = SERVICIOS.find(s => s.id === diagResultServiceId);
             document.getElementById("recommendedService").innerHTML = `
